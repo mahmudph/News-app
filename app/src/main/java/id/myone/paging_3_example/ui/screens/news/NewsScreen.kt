@@ -8,10 +8,13 @@ package id.myone.paging_3_example.ui.screens.news
 import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -29,11 +32,12 @@ fun NewsScreen(
     modifier: Modifier = Modifier,
     newsViewModel: NewsViewModel = getViewModel(),
     onNavigateToDetailNews: (article: ArticleTable) -> Unit,
+    onNavigateToSearchNews: () -> Unit,
 ) {
     val listNews = newsViewModel.newsResult.collectAsLazyPagingItems()
     Scaffold(
         topBar = {
-            SmallTopAppBar(
+            TopAppBar(
                 title = {
                     Text("Articles List",
                         maxLines = 1,
@@ -43,7 +47,12 @@ fun NewsScreen(
                 },
                 colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
-                )
+                ),
+                actions = {
+                    IconButton(onClick = onNavigateToSearchNews) {
+                        Icon(Icons.Default.Search, contentDescription = null, tint = Color.White)
+                    }
+                }
             )
         }
     ) { paddingValues ->

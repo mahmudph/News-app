@@ -39,13 +39,6 @@ fun NewsItemComponent(
     onPress: () -> Unit,
 ) {
 
-    val customIndication = rememberRipple(
-        color = Color.Green,
-        bounded = false,
-        radius = 50.dp
-    )
-
-
     Surface(modifier = modifier
         .fillMaxWidth()
         .clickable(onClick = onPress),
