@@ -13,6 +13,7 @@ import id.myone.paging_3_example.data.AppRepositoryContract
 import id.myone.paging_3_example.data.local.PagingExampleDatabase
 import id.myone.paging_3_example.data.remote.PagingServiceApi
 import id.myone.paging_3_example.ui.screens.news.NewsViewModel
+import id.myone.paging_3_example.ui.screens.search.SearchNewsViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -66,4 +67,5 @@ val appDatabaseModule = module {
 
 val viewModelModule = module {
     viewModel { NewsViewModel(get()) }
+    viewModel { SearchNewsViewModel(get()) }
 }
