@@ -3,7 +3,7 @@
  * mahmud120398@gmail.com
  */
 
-package id.myone.paging_3_example.ui.screens.news_screen.news
+package id.myone.paging_3_example.ui.screens.news
 
 import android.util.Log
 import androidx.compose.foundation.layout.*

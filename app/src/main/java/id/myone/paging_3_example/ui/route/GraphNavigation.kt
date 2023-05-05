@@ -5,14 +5,12 @@
 
 package id.myone.paging_3_example.ui.route
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import id.myone.paging_3_example.data.local.table.ArticleTable
-import id.myone.paging_3_example.ui.screens.news_screen.detail.NewsDetailScreen
-import id.myone.paging_3_example.ui.screens.news_screen.news.NewsScreen
+import id.myone.paging_3_example.ui.screens.detail.NewsDetailScreen
+import id.myone.paging_3_example.ui.screens.news.NewsScreen
 
 
 @Composable
@@ -31,10 +29,8 @@ fun GraphNavigation() {
         }
 
         composable(route = RouteName.detail) {
-            val article = navigationNav.previousBackStackEntry?.savedStateHandle?.get<ArticleTable>(RouteName.articleNavArgumentKey)
-            Log.d("data", article.toString())
             NewsDetailScreen(
-                navigationNav = navigationNav,
+                savedStateHandle = navigationNav.previousBackStackEntry?.savedStateHandle,
                 onNavigatePop = {
                     navigationNav.popBackStack()
                 }

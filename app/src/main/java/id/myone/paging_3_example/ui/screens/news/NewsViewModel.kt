@@ -3,7 +3,7 @@
  * mahmud120398@gmail.com
  */
 
-package id.myone.paging_3_example.ui.screens.news_screen.news
+package id.myone.paging_3_example.ui.screens.news
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

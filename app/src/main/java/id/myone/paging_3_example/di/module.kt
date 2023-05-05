@@ -12,7 +12,7 @@ import id.myone.paging_3_example.data.AppRepository
 import id.myone.paging_3_example.data.AppRepositoryContract
 import id.myone.paging_3_example.data.local.PagingExampleDatabase
 import id.myone.paging_3_example.data.remote.PagingServiceApi
-import id.myone.paging_3_example.ui.screens.news_screen.news.NewsViewModel
+import id.myone.paging_3_example.ui.screens.news.NewsViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext

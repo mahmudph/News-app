@@ -3,7 +3,7 @@
  * mahmud120398@gmail.com
  */
 
-package id.myone.paging_3_example.ui.screens.news_screen.detail
+package id.myone.paging_3_example.ui.screens.detail
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -20,7 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+import androidx.lifecycle.SavedStateHandle
 import id.myone.paging_3_example.R
 import id.myone.paging_3_example.data.local.table.ArticleTable
 import id.myone.paging_3_example.ui.route.RouteName
@@ -29,29 +29,31 @@ import id.myone.paging_3_example.ui.route.RouteName
 @Composable
 fun NewsDetailScreen(
     modifier: Modifier = Modifier,
-    navigationNav: NavController,
+    savedStateHandle: SavedStateHandle?,
     onNavigatePop: () -> Unit,
 ) {
     var article by remember { mutableStateOf<ArticleTable?>(null) }
 
-    article =
-        navigationNav.previousBackStackEntry?.savedStateHandle?.get<ArticleTable>(RouteName.articleNavArgumentKey)
+    LaunchedEffect(savedStateHandle) {
+        article = savedStateHandle?.get<ArticleTable>(RouteName.articleNavArgumentKey)
+    }
 
     Scaffold(topBar = {
         SmallTopAppBar(title = {
             Text(text = article?.title ?: "Detail Article",
                 maxLines = 1,
-                fontSize = 14.sp,
+                fontSize = 18.sp,
                 overflow = TextOverflow.Ellipsis,
                 color = MaterialTheme.colorScheme.onPrimary
             )
         }, navigationIcon = {
-            Icon(
-                Icons.Default.ArrowBack,
-                modifier = Modifier.clickable(onClick = onNavigatePop),
-                contentDescription = null,
-                tint = Color.White,
-            )
+            IconButton(onClick = onNavigatePop) {
+                Icon(
+                    Icons.Default.ArrowBack,
+                    contentDescription = null,
+                    tint = Color.White,
+                )
+            }
         },
             colors = TopAppBarDefaults.smallTopAppBarColors(
                 containerColor = MaterialTheme.colorScheme.primary
