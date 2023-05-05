@@ -2,4 +2,5 @@
     <string name="app_name">paging-3-example</string>
     <string name="error_title">Terjadi kesalahan</string>
     <string name="error_description">Terjadi kesalahan pada saat meng-load data, silahkan coba lagi </string>
+    <string name="search_placheolder">Cari Artikel</string>
 </resources>
