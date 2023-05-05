@@ -5,6 +5,9 @@
 
 package id.myone.paging_3_example.common
 
+import id.myone.paging_3_example.data.local.table.ArticleTable
+import id.myone.paging_3_example.data.remote.model.Article
+import id.myone.paging_3_example.data.remote.model.Source
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -15,4 +18,21 @@ fun String.formatToLocalDate(): String {
     val inputDate = formatDate.parse(this)!!
     val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
     return outputFormat.format(inputDate)
+}
+
+fun Article.mapToArticleTable(): ArticleTable {
+    return ArticleTable(
+        id = 0,
+        title = title,
+        description = description,
+        content = content,
+        publishedAt = publishedAt,
+        urlToImage = urlToImage,
+        url = url,
+        source = Source(
+            id =  source.id,
+            name = source.name
+        ),
+        author = author
+    )
 }
