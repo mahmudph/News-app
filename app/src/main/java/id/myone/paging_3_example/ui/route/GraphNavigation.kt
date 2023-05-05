@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import id.myone.paging_3_example.ui.screens.detail.NewsDetailScreen
 import id.myone.paging_3_example.ui.screens.news.NewsScreen
+import id.myone.paging_3_example.ui.screens.search.SearchNewsScreen
 
 
 @Composable
@@ -25,7 +26,11 @@ fun GraphNavigation() {
                 )
 
                 navigationNav.navigate(RouteName.detail)
-            })
+            },
+                onNavigateToSearchNews = {
+                    navigationNav.navigate(RouteName.search)
+                }
+            )
         }
 
         composable(route = RouteName.detail) {
@@ -34,6 +39,19 @@ fun GraphNavigation() {
                 onNavigatePop = {
                     navigationNav.popBackStack()
                 }
+            )
+        }
+
+        composable(route = RouteName.search) {
+            SearchNewsScreen(onNavigateToDetailPage = {
+                navigationNav.currentBackStackEntry?.savedStateHandle?.set(
+                    RouteName.articleNavArgumentKey, it
+                )
+
+                navigationNav.navigate(RouteName.detail)
+            }, onNavigatePop = {
+                navigationNav.popBackStack()
+            }
             )
         }
     }

@@ -16,4 +16,11 @@ interface PagingServiceApi {
         @Query("page") page: Int,
         @Query("pageSize") pageSize: Int,
     ): NewsResponse
+
+    @GET("/v2/everything")
+    suspend fun searchNews(
+        @Query("page") page: Int,
+        @Query("pageSize") pageSize: Int,
+        @Query("q") query: String,
+    ): NewsResponse
 }

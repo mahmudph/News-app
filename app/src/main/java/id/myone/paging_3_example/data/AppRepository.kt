@@ -11,13 +11,16 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import id.myone.paging_3_example.common.Constraint
 import id.myone.paging_3_example.data.local.PagingExampleDatabase
+import id.myone.paging_3_example.data.local.paging.ArticlesDataSources
 import id.myone.paging_3_example.data.local.paging.ArticlesRemoteMediator
 import id.myone.paging_3_example.data.local.table.ArticleTable
 import id.myone.paging_3_example.data.remote.PagingServiceApi
+import id.myone.paging_3_example.data.remote.model.Article
 import kotlinx.coroutines.flow.Flow
 
 interface AppRepositoryContract {
     fun getArticles(): Flow<PagingData<ArticleTable>>
+    fun searchArticles(searchQuery: String): Flow<PagingData<Article>>
 }
 
 
@@ -37,6 +40,15 @@ class AppRepository(
                 localDatabase = localDatabase,
             ),
             pagingSourceFactory = pagingSourceFactory,
+        ).flow
+    }
+
+    override fun searchArticles(searchQuery: String): Flow<PagingData<Article>> {
+        return Pager(
+            config = PagingConfig(pageSize = 10),
+            pagingSourceFactory = {
+                ArticlesDataSources(remoteService, searchQuery)
+            }
         ).flow
     }
 }
