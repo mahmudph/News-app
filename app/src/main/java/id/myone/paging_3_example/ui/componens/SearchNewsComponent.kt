@@ -37,7 +37,7 @@ fun SearchNewsComponent(
     OutlinedTextField(
         modifier = modifier
             .fillMaxWidth()
-            .background(Color.White)
+            .background(MaterialTheme.colorScheme.background)
             .padding(vertical = 8.dp, horizontal = 12.dp),
         value = value,
         onValueChange = onChangeText,

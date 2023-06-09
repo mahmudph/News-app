@@ -14,9 +14,12 @@ import id.myone.paging_3_example.data.local.PagingExampleDatabase
 import id.myone.paging_3_example.data.local.table.ArticleRemoteKeyTable
 import id.myone.paging_3_example.data.local.table.ArticleTable
 import id.myone.paging_3_example.data.remote.PagingServiceApi
+import id.myone.paging_3_example.urils.AppDataStore
+import kotlinx.coroutines.flow.first
 
 @OptIn(ExperimentalPagingApi::class)
 class ArticlesRemoteMediator(
+    private val storage: AppDataStore,
     private val remoteService: PagingServiceApi,
     private val localDatabase: PagingExampleDatabase,
 ) : RemoteMediator<Int, ArticleTable>() {
@@ -50,7 +53,8 @@ class ArticlesRemoteMediator(
                 }
             }
 
-            val response = remoteService.getNews(currentPage, state.config.pageSize)
+            val lang = storage.getLanguage.first()
+            val response = remoteService.getNews(currentPage, state.config.pageSize, lang)
             val isEndOfPaginationReached = response.articles.isEmpty()
 
             val prevPage = if (currentPage == 1) null else currentPage - 1

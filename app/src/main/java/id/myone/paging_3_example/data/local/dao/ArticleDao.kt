@@ -9,6 +9,7 @@ import androidx.paging.PagingSource
 import androidx.room.*
 import id.myone.paging_3_example.common.Constraint
 import id.myone.paging_3_example.data.local.table.ArticleTable
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ArticleDao {
@@ -24,4 +25,7 @@ interface ArticleDao {
 
     @Query("delete from ${Constraint.ARTICLE_TABLE}")
     suspend fun deleteAllArticles()
+
+    @Query("select * from ${Constraint.ARTICLE_TABLE}")
+    fun getTopRatedArticles(): Flow<List<ArticleTable>>
 }

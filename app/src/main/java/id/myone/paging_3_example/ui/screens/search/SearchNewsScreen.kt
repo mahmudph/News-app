@@ -5,12 +5,11 @@
 
 package id.myone.paging_3_example.ui.screens.search
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -31,6 +30,7 @@ import org.koin.androidx.compose.getViewModel
 
 typealias VoidCallback = () -> Unit
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun SearchNewsScreen(
     modifier: Modifier = Modifier,
@@ -68,23 +68,37 @@ fun SearchNewsScreen(
                     )
                 }
                 else -> {
-                    LazyColumn(modifier = Modifier.fillMaxSize(),
-                        contentPadding = PaddingValues(16.dp),
-                        verticalArrangement = Arrangement.spacedBy(12.dp)) {
 
-                        items(count = articles.itemCount,
-                            key = { index -> index },
-                            itemContent = { index ->
-                                articles[index]?.let { article ->
-                                    NewsItemComponent(
-                                        article = article,
-                                        onPress = {
-                                            onNavigateToDetailPage(article)
-                                        },
-                                    )
+                    if (articles.itemCount == 0 && articles.loadState.refresh !is LoadState.Loading) {
+                        Box(contentAlignment = Alignment.Center) {
+                            InformationComponent(
+                                title = stringResource(id = R.string.empty_search_title),
+                                description = stringResource(id = R.string.empty_search_desc)
+                            )
+                        }
+                    } else {
+
+                        LazyColumn(modifier = Modifier.fillMaxSize(),
+                            contentPadding = PaddingValues(16.dp),
+                            verticalArrangement = Arrangement.spacedBy(12.dp)) {
+
+                            items(count = articles.itemCount,
+                                key = { index -> index },
+                                itemContent = { index ->
+                                    articles[index]?.let { article ->
+                                        NewsItemComponent(
+                                            article = article,
+                                            modifier = Modifier.combinedClickable(
+                                                onClick = {
+                                                    onNavigateToDetailPage(article)
+                                                },
+                                                onLongClick = {}
+                                            )
+                                        )
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             }

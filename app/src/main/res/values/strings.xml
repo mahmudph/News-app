@@ -3,4 +3,39 @@
     <string name="error_title">Terjadi kesalahan</string>
     <string name="error_description">Terjadi kesalahan pada saat meng-load data, silahkan coba lagi </string>
     <string name="search_placheolder">Cari Artikel</string>
+
+
+    <!--   menu   -->
+    <string name="home">Home</string>
+    <string name="bookmark">Bookmark</string>
+    <string name="profile">Profile</string>
+
+    <string name="bookmark_article">Tandai Artikel</string>
+    <string name="delete_bookmark_article">Hapus Penanda Artikel</string>
+
+    <string name="empty_bookmark_title">Data Bookmark Tidak Ada</string>
+    <string name="empty_bookmark_desc">Anda tidak memiliki artike yang di bookmark</string>
+
+    <!-- search empty  -->
+    <string name="empty_search_title">Data Tidak di Temukan</string>
+    <string name="empty_search_desc">Data yang anda cari tidak ditemukan, silahkan cari dengan keyword lain</string>
+    <!--  trending  -->
+    <string name="trending_article">Artikel Tranding</string>
+    <string name="latest_article">Artikel Terbaru</string>
+
+    <!--  share  -->
+    <string name="share_article">Bagikan Artikel</string>
+
+    <!--  utility -->
+    <string name="dismiss">Dismiss</string>
+    <string name="ok">Oke</string>
+    <string name="settings">Pengaturan</string>
+    <string name="information">Informasi</string>
+    <string name="logout">Keluar</string>
+    <string name="cancel">Batal</string>
+    <string name="oke">Oke</string>
+    <string name="logout_confirm_info">Apa anda yakin ingin keluar dai aplikasi.? klik button oke untuk melanjutkan</string>
+    <string name="setting">Pengaturan</string>
+    <string name="preference_article_lang">Bahasa Artikel</string>
+    <string name="select_language">Pilih Bahasa</string>
 </resources>

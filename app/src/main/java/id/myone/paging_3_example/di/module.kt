@@ -12,8 +12,16 @@ import id.myone.paging_3_example.data.AppRepository
 import id.myone.paging_3_example.data.AppRepositoryContract
 import id.myone.paging_3_example.data.local.PagingExampleDatabase
 import id.myone.paging_3_example.data.remote.PagingServiceApi
+import id.myone.paging_3_example.ui.screens.bookmark.BookmarkViewModel
+import id.myone.paging_3_example.ui.screens.forgot_password.ForgotPasswordViewModel
+import id.myone.paging_3_example.ui.screens.login.LoginViewModel
 import id.myone.paging_3_example.ui.screens.news.NewsViewModel
+import id.myone.paging_3_example.ui.screens.profile.ProfileViewModel
+import id.myone.paging_3_example.ui.screens.register.RegisterViewModel
 import id.myone.paging_3_example.ui.screens.search.SearchNewsViewModel
+import id.myone.paging_3_example.ui.screens.settings.SettingsViewModel
+import id.myone.paging_3_example.ui.utils.SnackBarDelegate
+import id.myone.paging_3_example.urils.AppDataStore
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -51,7 +59,7 @@ val appNetworkModule = module {
         retrofit.create(PagingServiceApi::class.java)
     }
 
-    single<AppRepositoryContract> { AppRepository(get(), get()) }
+    single<AppRepositoryContract> { AppRepository(get(), get(), get()) }
 }
 
 
@@ -65,7 +73,21 @@ val appDatabaseModule = module {
     }
 }
 
+val appUtilityModule = module {
+    single { SnackBarDelegate(null, null) }
+    single { AppDataStore(androidContext()) }
+}
+
 val viewModelModule = module {
     viewModel { NewsViewModel(get()) }
     viewModel { SearchNewsViewModel(get()) }
+
+//    viewModel { LoginViewModel(get(), get()) }
+    viewModel { LoginViewModel() }
+    viewModel { RegisterViewModel() }
+    viewModel { ForgotPasswordViewModel() }
+    viewModel { BookmarkViewModel(get()) }
+
+    viewModel { ProfileViewModel(get()) }
+    viewModel { SettingsViewModel(get()) }
 }

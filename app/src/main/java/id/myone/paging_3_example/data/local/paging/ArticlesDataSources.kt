@@ -9,8 +9,11 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import id.myone.paging_3_example.data.remote.PagingServiceApi
 import id.myone.paging_3_example.data.remote.model.Article
+import id.myone.paging_3_example.urils.AppDataStore
+import kotlinx.coroutines.flow.first
 
 class ArticlesDataSources(
+    private val storage: AppDataStore,
     private val apiSource: PagingServiceApi,
     private val querySearch: String,
 ) : PagingSource<Int, Article>() {
@@ -26,7 +29,8 @@ class ArticlesDataSources(
         return try {
 
             val position = params.key ?: INITIAL_PAGE
-            val response = apiSource.searchNews(position, params.loadSize, querySearch)
+            val lang = storage.getLanguage.first()
+            val response = apiSource.searchNews(position, params.loadSize, querySearch, language = lang)
 
             LoadResult.Page(
                 data = response.articles,

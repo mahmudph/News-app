@@ -20,6 +20,7 @@ import androidx.lifecycle.SavedStateHandle
 import id.myone.paging_3_example.R
 import id.myone.paging_3_example.data.local.table.ArticleTable
 import id.myone.paging_3_example.ui.componens.InformationComponent
+import id.myone.paging_3_example.ui.componens.WebViewComponent
 import id.myone.paging_3_example.ui.route.RouteName
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -41,26 +42,27 @@ fun NewsDetailScreen(
                 maxLines = 1,
                 fontSize = 18.sp,
                 overflow = TextOverflow.Ellipsis,
-                color = MaterialTheme.colorScheme.onPrimary
+                color = MaterialTheme.colorScheme.onBackground
             )
         }, navigationIcon = {
             IconButton(onClick = onNavigatePop) {
                 Icon(
                     Icons.Default.ArrowBack,
                     contentDescription = null,
-                    tint = Color.White,
+                    tint = MaterialTheme.colorScheme.onBackground,
                 )
             }
         },
             colors = TopAppBarDefaults.smallTopAppBarColors(
-                containerColor = MaterialTheme.colorScheme.primary
+                containerColor = MaterialTheme.colorScheme.background
             )
         )
     }) { paddingValues ->
 
         Box(modifier = modifier.padding(paddingValues).fillMaxSize()) {
             if (article != null) {
-                NewsDetailContent(articleTable = article!!, modifier = Modifier.padding(16.dp))
+//                NewsDetailContent(articleTable = article!!, modifier = Modifier.padding(16.dp))
+                article?.url?.let { WebViewComponent(url = it) }
             } else {
                 InformationComponent(
                     title = stringResource(id = R.string.error_title),

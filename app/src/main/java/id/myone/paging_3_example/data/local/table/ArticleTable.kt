@@ -7,9 +7,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import id.myone.paging_3_example.data.remote.model.Source
 import kotlinx.parcelize.Parcelize
+import id.myone.paging_3_example.common.Constraint
 
 @Parcelize
-@Entity(tableName = "tbl_articles")
+@Entity(tableName = Constraint.ARTICLE_TABLE)
 data class ArticleTable(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
