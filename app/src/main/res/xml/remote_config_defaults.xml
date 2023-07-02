@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<defaults>
+    <entry>
+        <key>SHOULD_VERIFIED_ACCOUNT_IN_LOGIN</key>
+        <value>true</value>
+    </entry>
+    <entry>
+        <key>SHOULD_SEND_EMAIL_VERIFICATION</key>
+        <value>true</value>
+    </entry>
+    <entry>
+        <key>NEWS_LANGUAGE</key>
+        <value>en</value>
+    </entry>
+    <entry>
+        <key>WORK_MANAGER_INTERVAL_IN_HOUR</key>
+        <value>3</value>
+    </entry>
+    <entry>
+        <key>DEEP_LINK_HOST</key>
+        <value>https://my-news-fc85d.web.app</value>
+    </entry>
+</defaults>

@@ -13,7 +13,7 @@ dependencyResolutionManagement {
         maven { url 'https://jitpack.io' }
     }
 }
-rootProject.name = "paging-3-example"
+rootProject.name = "my_news"
 include ':app'
 
 

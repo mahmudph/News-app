@@ -1,6 +1,7 @@
 buildscript {
     ext {
         koin_version = "3.2.0"
+        koin_work_manager_version = "3.2.0"
         compose_version = "1.4.1"
         coil_version = "2.3.0"
         nav_version = "2.5.3"
@@ -11,9 +12,14 @@ buildscript {
         systemui_version = "0.10.0"
         state_event_version = "1.2.3"
         data_store_version = "1.0.0"
+        placheolder_version = "0.31.4-beta"
+        splashscreen_version = "1.0.1"
+        work_version = "2.8.0"
     }
     dependencies {
         classpath 'com.google.gms:google-services:4.3.15'
+        classpath 'com.android.tools.build:gradle:3.4.0'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.6'
     }
 
 }// Top-level build file where you can add configuration options common to all sub-projects/modules.

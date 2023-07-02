@@ -1,17 +1,18 @@
-plugins {
+ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'kotlin-parcelize'
     id 'com.google.gms.google-services'
-}
+     id 'com.google.firebase.crashlytics'
+ }
 
 android {
-    namespace 'id.myone.paging_3_example'
+    namespace 'id.myone.my_news'
     compileSdk 33
 
     defaultConfig {
-        applicationId "id.myone.paging_3_example"
+        applicationId "id.myone.my_news"
         minSdk 21
         targetSdk 33
         versionCode 1
@@ -64,6 +65,8 @@ dependencies {
     implementation "io.insert-koin:koin-core:$koin_version"
     implementation "io.insert-koin:koin-android:$koin_version"
     implementation "io.insert-koin:koin-androidx-compose:$koin_version"
+    implementation "io.insert-koin:koin-androidx-workmanager:$koin_work_manager_version"
+
 
     // navigation and view model
     implementation "androidx.navigation:navigation-compose:$nav_version"
@@ -75,6 +78,9 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-auth-ktx:22.0.0'
     implementation 'com.google.android.gms:play-services-auth:20.5.0'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.7'
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.3.0'
+    implementation 'com.google.firebase:firebase-config-ktx:21.4.0'
 
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
@@ -86,6 +92,15 @@ dependencies {
 
     implementation "me.omico.lux:lux-androidx-compose-material3-pullrefresh"
     implementation 'com.github.nanihadesuka:LazyColumnScrollbar:1.6.3'
+
+    // placeholder
+    implementation "com.google.accompanist:accompanist-placeholder-material:$placheolder_version"
+
+    // splashscreen
+    implementation "androidx.core:core-splashscreen:$splashscreen_version"
+
+    // Pager and Indicators - Accompanist
+    implementation "androidx.work:work-runtime-ktx:$work_version"
 
     // coil
     implementation "io.coil-kt:coil:$coil_version"
