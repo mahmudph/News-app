@@ -73,7 +73,7 @@ class NotificationHandler(
     fun createPendingIntent(param: Int): PendingIntent {
         val hostUrl = configApp.getValue(Constraint.Config.deeplinkHostUri)
 
-        val url = "$hostUrl/news?news_id=$param"
+        val url = "$hostUrl/news?id=$param"
         val taskDetailIntent = Intent(Intent.ACTION_VIEW, url.toUri(), context, id.myone.my_news.MainActivity::class.java)
 
         return TaskStackBuilder.create(context).run {
