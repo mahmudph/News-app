@@ -12,8 +12,8 @@ import android.os.Build
 import androidx.core.net.toUri
 import id.myone.my_news.R
 import androidx.core.app.NotificationCompat
+import id.myone.my_news.MainActivity
 import id.myone.my_news.common.Constraint
-import android.app.Notification.VISIBILITY_PUBLIC
 import id.myone.my_news.utils.config.RemoteConfigApp
 
 class NotificationHandler(
@@ -22,9 +22,7 @@ class NotificationHandler(
 ) {
     private lateinit var notificationManager: NotificationManager
 
-    init {
-        createNotificationChanel()
-    }
+    init { createNotificationChanel() }
 
     fun createNotificationData(
         title: String,
@@ -33,16 +31,14 @@ class NotificationHandler(
     ): Notification {
 
         val builder = NotificationCompat.Builder(context, channelId)
-            .setSmallIcon(R.drawable.logo)
-            .setContentTitle(title)
-            .setContentText(description)
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            .setSmallIcon(R.drawable.logo)
+            .setContentText(description)
+            .setContentTitle(title)
             .setAutoCancel(true)
-            .setVisibility(VISIBILITY_PUBLIC)
 
-        if (pendingIntent != null) {
-            builder.setContentIntent(pendingIntent)
-        }
+        if (pendingIntent != null) builder.setContentIntent(pendingIntent)
 
         return builder.build()
     }
@@ -55,9 +51,11 @@ class NotificationHandler(
     private fun createNotificationChanel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
-            val channel = NotificationChannel(channelId,
+            val channel = NotificationChannel(
+                channelId,
                 channelName,
-                NotificationManager.IMPORTANCE_DEFAULT).apply {
+                NotificationManager.IMPORTANCE_DEFAULT
+            ).apply {
                 description = channelDesc
             }
 
@@ -71,24 +69,26 @@ class NotificationHandler(
 
 
     fun createPendingIntent(param: Int): PendingIntent {
-        val hostUrl = configApp.getValue(Constraint.Config.deeplinkHostUri)
+        val hostUrl = configApp.getValue(Constraint.Config.deeplinkHostUri).asString()
 
         val url = "$hostUrl/news?id=$param"
-        val taskDetailIntent = Intent(Intent.ACTION_VIEW, url.toUri(), context, id.myone.my_news.MainActivity::class.java)
+        val taskDetailIntent = Intent(Intent.ACTION_VIEW, url.toUri(), context, MainActivity::class.java)
 
         return TaskStackBuilder.create(context).run {
+
             addNextIntentWithParentStack(taskDetailIntent)
 
             val pendingFlag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 PendingIntent.FLAG_IMMUTABLE
             } else PendingIntent.FLAG_UPDATE_CURRENT
 
-            getPendingIntent(10, pendingFlag)
+            getPendingIntent(requestCode, pendingFlag)
         }
     }
 
     companion object {
         private var notifyId = 0
+        private const val requestCode = 10
         private const val channelId = "my-news-app-id"
         private const val channelName = "my news channel name"
         private const val channelDesc = "my news description"
