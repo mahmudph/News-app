@@ -73,6 +73,10 @@ fun LoginScreen(
                     userData.data?.let { viewModel.setLoginUser(it) }
                     Log.d("RESULT", response.toString())
                 }
+            } else {
+                scope.launch {
+                    snackBarHostState.showSnackbar("failed to login, please try again")
+                }
             }
         }
     )
