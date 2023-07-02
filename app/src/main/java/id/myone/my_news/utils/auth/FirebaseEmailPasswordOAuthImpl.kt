@@ -72,11 +72,12 @@ class FirebaseEmailPasswordOAuthImpl(
             val result = auth.signInWithEmailAndPassword(email, password).await()
             val isVerified = result.user?.isEmailVerified ?: false
 
-            if (shouldVerifiedAccount) {
-                if (!isVerified) throw Exception("Please verify an account before login to the app")
+            if (shouldVerifiedAccount && !isVerified) {
+                throw Exception("Please verify an account before login to the app")
             }
 
-            FirebaseAuthState(isSuccess = true, data = result.user?.mapToUserAuthResult())
+            val userToken = getUserToken()
+            FirebaseAuthState(isSuccess = true, data = result.user?.mapToUserAuthResult(), token = userToken)
 
         } catch(e: FirebaseAuthInvalidCredentialsException) {
             FirebaseAuthState(isSuccess = false, message = "invalid password, please try again")

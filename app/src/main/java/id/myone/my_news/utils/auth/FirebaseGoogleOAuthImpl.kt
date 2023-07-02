@@ -24,6 +24,7 @@ interface FirebaseGoogleAuthContract {
     suspend fun launchForAuthResult(idToken: String): FirebaseAuthState
     suspend fun getSignedInAccountFromIntent(intent: Intent): String?
     suspend fun getIntentRequest(): Intent?
+
 }
 
 class FirebaseGoogleOAuthImpl(
@@ -52,7 +53,8 @@ class FirebaseGoogleOAuthImpl(
             val credential = GoogleAuthProvider.getCredential(idToken, null)
             val result = auth.signInWithCredential(credential).await()
 
-            FirebaseAuthState(isSuccess = true, data = result.user?.mapToUserAuthResult())
+            val userToken = getUserToken()
+            FirebaseAuthState(isSuccess = true, data = result.user?.mapToUserAuthResult(), token = userToken)
 
         } catch(e: FirebaseAuthInvalidUserException) {
             val message = when(e.errorCode) {
